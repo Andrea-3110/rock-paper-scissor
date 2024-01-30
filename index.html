@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <title>Document</title>
+</head>
+<body>
+   <script>
+      
+      const choices = ["rock","paper","scissor"];
+      
+      function validator(str){return str.toLowerCase()}
+
+      function getComputerChoice(){
+         return choices[(Math.floor(Math.random() * choices.length))]
+      }
+
+      function playRound(playerSelection, computerSelection, score) {
+         if((playerSelection == 'rock' && computerSelection == 'scissor') || 
+            (playerSelection == 'paper' && computerSelection == 'rock') || 
+            (playerSelection == 'scissor' && computerSelection == 'paper')){
+            score['player']++
+            return  `You Won! ${playerSelection} beats ${computerSelection}`
+         }
+         else if(playerSelection == computerSelection){
+            return  "Tie!"
+         }
+         else{
+            score['pc']++
+            return  `You Lose! ${computerSelection} beats ${playerSelection}`
+         }
+      }
+
+
+      function playGame(playerSelection,score,game){
+         setTimeout(1000)
+         do{
+            playerSelection = validator(prompt(`Enter your choice [rock,paper,scissor] game:${game}`))
+         }while(!choices.includes(playerSelection));
+
+         
+         const computerSelection = getComputerChoice();
+         
+         console.log(playRound(playerSelection,computerSelection, score))
+      }
+
+      let playerSelection = ''
+
+      let score = {
+         "pc":0,
+         "player":0
+      }
+
+
+      for(let i = 1; i <= 5; i++){
+
+         playGame(playerSelection,score,i)
+
+      }
+      console.log(`the final score is: Player${score['player']} PC:${score['pc']}`)
+
+      
+
+   </script>
+</body>
+</html>
